@@ -1,0 +1,25 @@
+{
+  "alumnos": [
+    {
+      "nombre": "Jeroham",
+      "fechaNac": "1981-05-26",
+      "colegio": "Tecnoalbatros",
+      "graGru": "S3B",
+      "id": 1
+    },
+    {
+      "nombre": "Jeroham",
+      "fechaNac": "1981-05-26",
+      "colegio": "Albatros",
+      "graGru": "S3A",
+      "id": 2
+    },
+    {
+      "nombre": "Jesse",
+      "fechaNac": "1985-09-30",
+      "colegio": "Tecnoalbatros",
+      "graGru": "S2A",
+      "id": 3
+    }
+  ]
+}
