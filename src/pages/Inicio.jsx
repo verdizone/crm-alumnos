@@ -16,6 +16,25 @@ const Inicio = () => {
     }
     obtenerAlumnosAPI()
   }, [])
+
+  const handleEliminarAlumnos = async id =>{
+    const confirmar  = confirm('¿Seguro que desea eliminar al alumno?')
+    
+    if(confirmar){
+      //Llamar la api para que elimine el registro
+      try {
+        const url =`http://localhost:4000/alumnos/${id}`
+        const respuesta = await fetch(url, {
+          method: 'DELETE',
+        })
+        await respuesta.json()
+        const arrayAlumnos = alumnos.filter( alumno => alumno.id !== id)
+        setAlumnos(arrayAlumnos)
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }
     
   return (
     <>
@@ -37,6 +56,7 @@ const Inicio = () => {
                 <Alumno 
                   key={alumno.id}
                   alumno={alumno}
+                  handleEliminarAlumnos={handleEliminarAlumnos}
                 />
               ))
             }

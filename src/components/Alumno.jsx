@@ -1,7 +1,7 @@
 import React from 'react'
 import {useNavigate} from 'react-router-dom'
 
-const Alumno = ({alumno}) => {
+const Alumno = ({alumno, handleEliminarAlumnos}) => {
     const navigate = useNavigate()
     const {nombre, fechaNac, colegio, graGru, id } = alumno
   return (
@@ -19,11 +19,15 @@ const Alumno = ({alumno}) => {
                 Ver
             </button>
             
-            <button className='block w-full bg-blue-600 hover:bg-blue-700 text-white p-3 uppercase font-bold text-xs mt-2'>
+            <button
+                onClick={()=>(navigate(`/alumnos/editar/${id}`))} 
+                className='block w-full bg-blue-600 hover:bg-blue-700 text-white p-3 uppercase font-bold text-xs mt-2'>
                 Editar
             </button>
             
-            <button className='block w-full bg-red-600 hover:bg-red-700 text-white p-3 uppercase font-bold text-xs my-2'>
+            <button
+                onClick={()=>(handleEliminarAlumnos(id))} 
+                className='block w-full bg-red-600 hover:bg-red-700 text-white p-3 uppercase font-bold text-xs my-2'>
                 Eliminar
             </button>
             

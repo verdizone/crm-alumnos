@@ -2,10 +2,12 @@ import {Formik, Form, Field} from 'formik'
 import * as Yup from 'yup'
 import Alerta from './Alerta'
 import {useNavigate} from 'react-router-dom'
+import Spinner from './Spinner'
+// import {useState} from 'react'
 
-
-const Formulario = () => {
-
+const Formulario = ({alumno, cargando})=>{
+  
+  // const [cargando, setCargando] = useState(false)
   const navigate = useNavigate()
 
   const nuevoAlumnosSchema = Yup.object().shape({
@@ -16,37 +18,56 @@ const Formulario = () => {
   })
 
   const handleSubmit = async (valores) =>{
-    // console.log(valores);
     try {
-      const url = 'http://localhost:4000/alumnos'
-      const respuesta = await fetch(url, {
-        method:"POST",
-        body: JSON.stringify(valores),
-        headers: {
-          "Content-Type": "application/json"
-        }
-      
-      })
-      console.log(respuesta);
-      const resultado = await respuesta.json()
-      console.log(resultado);
+      let respuesta
+      if(alumno.id){
+        const url =`http://localhost:4000/alumnos/${alumno.id}`
+        respuesta = await fetch(url, {
+          method:"PUT",
+          body: JSON.stringify(valores),
+          headers: {
+            "Content-Type": "application/json"
+          }
+        
+        })
+      }else{
+        //nuevo alumno
+        const url = 'http://localhost:4000/alumnos'
+        respuesta = await fetch(url, {
+          method:"POST",
+          body: JSON.stringify(valores),
+          headers: {
+            "Content-Type": "application/json"
+          }
+        
+        })
+      }
+      await respuesta.json()
+      navigate('/alumnos')
+
     } catch (error) {
       console.log(error);
     }
+    
   }
 
   return (
+
+    cargando ? <Spinner /> : (
+
     <div className='bg-white mt-10 px-5 py-10 rounded-md shadow-md md:w-3/4 mx-auto'>
       <h1 
         className='font-bold text-gray-600 text-xl text-center uppercase'>
-            Ingresar Información Del Alumno</h1>
+            {alumno?.nombre ? 'Editar Alumno' : 'Nuevo Alumno'}
+      </h1>
             <Formik
               initialValues={{
-                nombre:"",
-                fechaNac:"",
-                colegio:"",
-                graGru:"",
+                nombre: alumno?.nombre ?? "",
+                fechaNac: alumno?.fechaNac ?? "",
+                colegio: alumno?.colegio ?? "",
+                graGru: alumno?.graGru ?? "",
               }}
+              enableReinitialize={true}
               onSubmit={async (values, {resetForm})=>{
                 await handleSubmit(values)
                 resetForm()
@@ -195,12 +216,11 @@ const Formulario = () => {
                 <div className='mt-10'>
                   <input 
                     type="submit"
-                    value="Agregar Alumno" 
+                    value={alumno?.nombre ? 'Editar Alumno' : 'Nuevo Alumno'} 
                     className='block w-full uppercase font-bold bg-blue-900 text-white text-xl p-3
                     cursor-pointer hover:bg-blue-800 transition-colors shadow-md mb-5 rounded-md'
                   />
                 </div>
-                      
                 
               </Form>
               )}}
@@ -209,7 +229,13 @@ const Formulario = () => {
   
       
     </div>
+    )     
   )
+}
+
+Formulario.defaultProps={
+  alumno:{},
+  cargando: false
 }
 
 export default Formulario

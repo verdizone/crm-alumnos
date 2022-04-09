@@ -1,25 +1,18 @@
 {
   "alumnos": [
     {
-      "nombre": "Jeroham",
+      "nombre": "Jeroham Pablo Miranda Miranda",
       "fechaNac": "1981-05-26",
       "colegio": "Tecnoalbatros",
       "graGru": "S3B",
       "id": 1
     },
     {
-      "nombre": "Jeroham",
-      "fechaNac": "1981-05-26",
+      "nombre": "Panthro",
+      "fechaNac": "1984-05-23",
       "colegio": "Albatros",
-      "graGru": "S3A",
-      "id": 2
-    },
-    {
-      "nombre": "Jesse",
-      "fechaNac": "1985-09-30",
-      "colegio": "Tecnoalbatros",
-      "graGru": "S2A",
-      "id": 3
+      "graGru": "P3A",
+      "id": 5
     }
   ]
 }

@@ -3,6 +3,7 @@ import Layout from "./layout/Layout"
 import VerAlumno from "./pages/VerAlumno"
 import Inicio from "./pages/Inicio"
 import NuevoAlumno from "./pages/NuevoAlumno"
+import EditarAlumno from './pages/EditarAlumno'
 
 
 const App = () =>{
@@ -13,6 +14,7 @@ const App = () =>{
                     <Route path="/alumnos" element={<Layout />}>
                         <Route index element={<Inicio />}/>
                         <Route path="nuevo" element={<NuevoAlumno />}/>
+                        <Route path="editar/:id" element={<EditarAlumno />}/>
                         <Route path=":id" element={<VerAlumno />}/>
                     </Route>
                 </Routes>

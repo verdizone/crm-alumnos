@@ -34,7 +34,7 @@ const VerAlumno = () => {
                 <p className="mt-3">Información del alumno.</p>
             
                 {alumno.nombre && (
-                    <p className='text-4xl text-gray-800 mt-10'>
+                    <p className='text-3xl text-gray-800 mt-10'>
                         <span className='text-gray-700 uppercase font-bold '>Alumno: </span> 
                         {alumno.nombre}
                     </p>
